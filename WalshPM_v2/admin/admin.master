@@ -1,0 +1,6 @@
+﻿<%@ Master MasterPageFile="~/template.master" Language="C#" AutoEventWireup="true" %>
+<asp:Content runat="server" ContentPlaceHolderID="body">
+<asp:ContentPlaceHolder runat="server" ID="body">
+
+</asp:ContentPlaceHolder>
+</asp:Content>

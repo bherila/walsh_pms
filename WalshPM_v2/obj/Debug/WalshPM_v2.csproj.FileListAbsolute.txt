@@ -1,0 +1,7 @@
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\bin\WalshPM_v2.dll
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\bin\WalshPM_v2.pdb
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\obj\Debug\ResolveAssemblyReference.cache
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\obj\Debug\WalshPM_v2.dll.licenses
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\obj\Debug\WalshPM_v2.dll
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\obj\Debug\WalshPM_v2.pdb
+B:\Docs\Visual Studio 2008\Projects\WalshPM_v2\WalshPM_v2\bin\obout_Splitter2_Net.dll
