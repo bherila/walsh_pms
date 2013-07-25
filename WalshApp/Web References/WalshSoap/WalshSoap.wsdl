@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://walshco.elixhosting.com/SVC/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://walshco.elixhosting.com/SVC/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://walshco.elixhosting.com/SVC/">
+      <s:element name="FindDir">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentId" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="dirName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindDirResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindDirResult" type="s:unsignedInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDir">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isProject" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDirResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateDirResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPermissions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPermissionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserPermissionsResult" type="tns:Permissions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Permissions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="accessor_id" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadFile" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="WriteFile" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="ViewInfo" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="Comment" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReadHistorical" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManageHistorical" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="Rename" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="Delete" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="Copy" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChangePermissions" type="tns:Access" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChangeOwner" type="tns:Access" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Access">
+        <s:restriction base="s:string">
+          <s:enumeration value="Allow" />
+          <s:enumeration value="Deny" />
+          <s:enumeration value="Inherit" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RetrieveFileData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeBinaryData" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeTempUrl" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetrieveFileDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetrieveFileDataResult" type="tns:FileData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FileData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="parentId" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="objectName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="objectType" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="revisionDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="tempURL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindObjectID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="object_name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindObjectIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FindObjectIDResult" type="s:unsignedInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObjectExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObjectExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObjectExistsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateFileFromBytes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateFileFromBytesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateFileFromBytesResult" type="tns:CreateFileData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreateFileData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="file_name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="object_type" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="file_parts" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="together_checksum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateFileResult" type="tns:CreateFileData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubitems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubitemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubitemsResult" type="tns:ArrayOfObjectTreeData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfObjectTreeData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ObjectTreeData" nillable="true" type="tns:ObjectTreeData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ObjectTreeData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="parent_object_id" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="object_type" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="object_description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="object_server" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="object_bucket" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="object_key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="object_size" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="revision_date" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="child_count" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="object_name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTemplates">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTemplatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTemplatesResult" type="tns:ArrayOfObjectTreeData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemResult" type="tns:ObjectTreeData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenameItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="old_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="new_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenameItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RenameItemResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="parent_id" type="s:unsignedInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="object_name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteItemResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="object_id" type="s:unsignedInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="destination_parent" type="s:unsignedInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="copyItemSelf" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CopyItemResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CleanTempFiles">
+        <s:complexType />
+      </s:element>
+      <s:element name="CleanTempFilesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="JoinFilesServer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file_part_guids" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="together_checksum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JoinFilesServerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JoinFilesServerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFilePart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file_data" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="checksum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFilePartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFilePartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FindDirSoapIn">
+    <wsdl:part name="parameters" element="tns:FindDir" />
+  </wsdl:message>
+  <wsdl:message name="FindDirSoapOut">
+    <wsdl:part name="parameters" element="tns:FindDirResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateDirSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateDir" />
+  </wsdl:message>
+  <wsdl:message name="CreateDirSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateDirResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserPermissions" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveFileDataSoapIn">
+    <wsdl:part name="parameters" element="tns:RetrieveFileData" />
+  </wsdl:message>
+  <wsdl:message name="RetrieveFileDataSoapOut">
+    <wsdl:part name="parameters" element="tns:RetrieveFileDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindObjectIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FindObjectID" />
+  </wsdl:message>
+  <wsdl:message name="FindObjectIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FindObjectIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObjectExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:ObjectExists" />
+  </wsdl:message>
+  <wsdl:message name="ObjectExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:ObjectExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateFileFromBytesSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateFileFromBytes" />
+  </wsdl:message>
+  <wsdl:message name="CreateFileFromBytesSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateFileFromBytesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateFileSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateFile" />
+  </wsdl:message>
+  <wsdl:message name="CreateFileSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubitemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubitems" />
+  </wsdl:message>
+  <wsdl:message name="GetSubitemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubitemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTemplatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTemplates" />
+  </wsdl:message>
+  <wsdl:message name="GetTemplatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItem" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="RenameItemSoapIn">
+    <wsdl:part name="parameters" element="tns:RenameItem" />
+  </wsdl:message>
+  <wsdl:message name="RenameItemSoapOut">
+    <wsdl:part name="parameters" element="tns:RenameItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItem" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyItem" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="LoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CleanTempFilesSoapIn">
+    <wsdl:part name="parameters" element="tns:CleanTempFiles" />
+  </wsdl:message>
+  <wsdl:message name="CleanTempFilesSoapOut">
+    <wsdl:part name="parameters" element="tns:CleanTempFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="JoinFilesServerSoapIn">
+    <wsdl:part name="parameters" element="tns:JoinFilesServer" />
+  </wsdl:message>
+  <wsdl:message name="JoinFilesServerSoapOut">
+    <wsdl:part name="parameters" element="tns:JoinFilesServerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFilePartSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFilePart" />
+  </wsdl:message>
+  <wsdl:message name="UploadFilePartSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFilePartResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WalshSoapSoap">
+    <wsdl:operation name="FindDir">
+      <wsdl:input message="tns:FindDirSoapIn" />
+      <wsdl:output message="tns:FindDirSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDir">
+      <wsdl:input message="tns:CreateDirSoapIn" />
+      <wsdl:output message="tns:CreateDirSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissions">
+      <wsdl:input message="tns:GetUserPermissionsSoapIn" />
+      <wsdl:output message="tns:GetUserPermissionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveFileData">
+      <wsdl:input message="tns:RetrieveFileDataSoapIn" />
+      <wsdl:output message="tns:RetrieveFileDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindObjectID">
+      <wsdl:input message="tns:FindObjectIDSoapIn" />
+      <wsdl:output message="tns:FindObjectIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObjectExists">
+      <wsdl:input message="tns:ObjectExistsSoapIn" />
+      <wsdl:output message="tns:ObjectExistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFileFromBytes">
+      <wsdl:input message="tns:CreateFileFromBytesSoapIn" />
+      <wsdl:output message="tns:CreateFileFromBytesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <wsdl:input message="tns:CreateFileSoapIn" />
+      <wsdl:output message="tns:CreateFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubitems">
+      <wsdl:input message="tns:GetSubitemsSoapIn" />
+      <wsdl:output message="tns:GetSubitemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <wsdl:input message="tns:GetTemplatesSoapIn" />
+      <wsdl:output message="tns:GetTemplatesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <wsdl:input message="tns:GetItemSoapIn" />
+      <wsdl:output message="tns:GetItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenameItem">
+      <wsdl:input message="tns:RenameItemSoapIn" />
+      <wsdl:output message="tns:RenameItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <wsdl:input message="tns:DeleteItemSoapIn" />
+      <wsdl:output message="tns:DeleteItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <wsdl:input message="tns:CopyItemSoapIn" />
+      <wsdl:output message="tns:CopyItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:input message="tns:LoginUserSoapIn" />
+      <wsdl:output message="tns:LoginUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanTempFiles">
+      <wsdl:input message="tns:CleanTempFilesSoapIn" />
+      <wsdl:output message="tns:CleanTempFilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinFilesServer">
+      <wsdl:input message="tns:JoinFilesServerSoapIn" />
+      <wsdl:output message="tns:JoinFilesServerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFilePart">
+      <wsdl:input message="tns:UploadFilePartSoapIn" />
+      <wsdl:output message="tns:UploadFilePartSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WalshSoapSoap" type="tns:WalshSoapSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindDir">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/FindDir" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDir">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/CreateDir" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissions">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/GetUserPermissions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveFileData">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/RetrieveFileData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindObjectID">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/FindObjectID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObjectExists">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/ObjectExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFileFromBytes">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/CreateFileFromBytes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/CreateFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubitems">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/GetSubitems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/GetTemplates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/GetItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameItem">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/RenameItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/CopyItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanTempFiles">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/CleanTempFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinFilesServer">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/JoinFilesServer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFilePart">
+      <soap:operation soapAction="http://walshco.elixhosting.com/SVC/UploadFilePart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WalshSoapSoap12" type="tns:WalshSoapSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindDir">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/FindDir" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDir">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/CreateDir" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissions">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/GetUserPermissions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveFileData">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/RetrieveFileData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindObjectID">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/FindObjectID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObjectExists">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/ObjectExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFileFromBytes">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/CreateFileFromBytes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/CreateFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubitems">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/GetSubitems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/GetTemplates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/GetItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameItem">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/RenameItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/CopyItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/LoginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanTempFiles">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/CleanTempFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinFilesServer">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/JoinFilesServer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFilePart">
+      <soap12:operation soapAction="http://walshco.elixhosting.com/SVC/UploadFilePart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WalshSoap">
+    <wsdl:port name="WalshSoapSoap" binding="tns:WalshSoapSoap">
+      <soap:address location="http://svc.walshcompany.com/svc/WalshSoap.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WalshSoapSoap12" binding="tns:WalshSoapSoap12">
+      <soap12:address location="http://svc.walshcompany.com/svc/WalshSoap.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

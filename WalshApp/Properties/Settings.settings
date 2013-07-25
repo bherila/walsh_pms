@@ -1,0 +1,17 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WalshApp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="walshcoConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;server=mysql.vxcv.com;user id=walshcompany;Password=Uz42WRVHPw58;persist security info=True;database=walshco&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;MySql.Data.MySqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">server=mysql.vxcv.com;user id=walshcompany;Password=Uz42WRVHPw58;persist security info=True;database=walshco</Value>
+    </Setting>
+    <Setting Name="WalshApp_com_walshcompany_svc_WalshSoap" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://svc.walshcompany.com/svc/WalshSoap.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
